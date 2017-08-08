@@ -1,0 +1,11 @@
+---
+version: 5
+defaults:
+  datadir: '/tmp/packer-puppet-masterless/hieradata'
+  data_hash: yaml_data
+hierarchy:
+  - name: "Other YAML hierarchy levels"
+    paths:
+      - "roles/%{::role}.yaml"
+      - "os/%{facts.os.family}.yaml"
+      - "common.yaml"

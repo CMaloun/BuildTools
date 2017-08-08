@@ -1,0 +1,67 @@
+{
+  "builders": [{
+    "type": "azure-arm",
+
+    "client_id": "c9c28c19-8108-419a-947a-8f0bdfc19890",
+    "client_secret": "P@ssw0rd!",
+    "tenant_id": "b7059145-f415-4623-8b32-0d85f210ebdc",
+    "subscription_id": "0046616c-8a09-4b8b-a5c1-fc7272d5e7b5",
+
+    "resource_group_name": "myResourceGroup",
+    "storage_account": "mypackerstorageaccount",
+
+    "capture_container_name": "images",
+    "capture_name_prefix": "packer",
+
+    "os_type": "Linux",
+    "image_publisher": "OpenLogic",
+    "image_offer": "CentOS",
+    "image_sku": "7.2",
+	
+	"communicator": "ssh",
+    "ssh_pty": "true",
+
+	
+    "azure_tags": {
+        "dept": "Engineering",
+        "task": "Image deployment"
+    },
+
+    "location": "East US",
+    "vm_size": "Standard_DS2_v2"
+  }],
+  "provisioners": [{
+    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+    "inline": [
+      "yum update -y",
+      "sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm",
+      "sudo yum install puppet-agent -y",
+	  "sudo mkdir -m777 /tmp/packer-puppet-masterless",
+	  "sudo mkdir -m777 /tmp/packer-puppet-masterless/hieradata",
+      "sudo service puppet start",
+	  "sleep 30"
+    ], 	
+    "inline_shebang": "/bin/sh -x",
+    "type": "shell",
+    "skip_clean": true
+	},
+	{
+      "type": "file",
+      "source": "code/environments/production/hieradata/",
+      "destination": "/tmp/packer-puppet-masterless/hieradata"
+    },
+	{
+		"type": "puppet-masterless", "puppet_bin_dir": "/opt/puppetlabs/bin", "manifest_file": "code/environments/production/manifests/site.pp", "hiera_config_path": "code/hiera.yaml", "module_paths": ["code/environments/production/modules"]
+	},
+	  {
+		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+		"inline": [
+		  "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+		],
+		"inline_shebang": "/bin/sh -x",
+		"type": "shell",
+		"skip_clean": true
+	  }
+
+	]
+}

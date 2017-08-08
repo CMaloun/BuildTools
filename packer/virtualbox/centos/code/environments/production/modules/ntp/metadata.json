@@ -1,0 +1,15 @@
+{
+  "name": "cmaloungila-ntp",
+  "version": "0.1.0",
+  "author": "cmaloungila",
+  "summary": "A simple ntp client module to demonstrate creating puppet module",
+  "license": "Apache-2.0",
+  "source": "https://github.com/cmaloun/puppet-developer/",
+  "project_page": "https://github.com/CMaloun/puppet-developer/readme.md",
+  "issues_url": "https://github.com/cmaloun/puppet-developer/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+

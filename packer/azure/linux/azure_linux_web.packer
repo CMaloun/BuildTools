@@ -17,11 +17,11 @@
     "image_publisher": "OpenLogic",
     "image_offer": "CentOS",
     "image_sku": "7.2",
-	
+
 	"communicator": "ssh",
     "ssh_pty": "true",
 
-	
+
     "azure_tags": {
         "dept": "Engineering",
         "task": "Image deployment"
@@ -40,7 +40,7 @@
 	  "sudo mkdir -m777 /tmp/packer-puppet-masterless/hieradata",
       "sudo service puppet start",
 	  "sleep 30"
-    ], 	
+    ],
     "inline_shebang": "/bin/sh -x",
     "type": "shell",
     "skip_clean": true
@@ -51,7 +51,7 @@
       "destination": "/tmp/packer-puppet-masterless/hieradata"
     },
 	{
-		"type": "puppet-masterless", "puppet_bin_dir": "/opt/puppetlabs/bin", "manifest_file": "code/environments/production/manifests/site.pp", "hiera_config_path": "code/hiera.yaml", "module_paths": ["code/environments/production/modules"]
+		"type": "puppet-masterless", "facter": { "role": "webserver" }, "puppet_bin_dir": "/opt/puppetlabs/bin", "manifest_file": "code/environments/production/manifests/site.pp", "hiera_config_path": "code/hiera.yaml", "module_paths": ["code/environments/production/modules"]
 	},
 	  {
 		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",

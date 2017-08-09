@@ -4,6 +4,6 @@ export imageodisk=$(cat ../../Packer/Logs/packer-build-output.log | grep OSDiskU
 
 echo $imageodisk
 
-sed -i 's|@@IMAGEURI@@|'"$imageodisk"'|g' main.tf
+sed -i 's|@@IMAGEURI@@|'"$imageodisk"'|g' variables.tf
 
-cat maint.tf
+cat variables.tf

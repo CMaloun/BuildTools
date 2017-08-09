@@ -1,0 +1,13 @@
+[0m[1mazurerm_resource_group.rg: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-fc7272d5e7b5/resourceGroups/myrg)[0m
+[0m[1mazurerm_public_ip.pip: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-...etwork/publicIPAddresses/mymachine1-ip)[0m
+[0m[1mazurerm_virtual_network.vnet: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-...Network/virtualNetworks/mymachine1vnet)[0m
+[0m[1mazurerm_subnet.subnet: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-...ymachine1vnet/subnets/mymachine1subnet)[0m
+[0m[1mazurerm_network_interface.nic: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-...etwork/networkInterfaces/mymachine1nic)[0m
+[0m[1mazurerm_virtual_machine.vm: Refreshing state... (ID: /subscriptions/0046616c-8a09-4b8b-a5c1-...oft.Compute/virtualMachines/mymachine1)[0m
+[0m[1m[32m
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.[0m
+[0m[1m[32m
+Outputs:
+
+hostname = mymachine1
+vm_fqdn = mymachine1.eastus.cloudapp.azure.com[0m

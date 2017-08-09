@@ -1,5 +1,5 @@
-#!/bin/bash
+cd ..#!/bin/bash
 
-export imageodisk=$(cat packer-build-output.log | grep OSDiskUri: | awk '{print $2}')
+export imageodisk=$(cat ../../Packer/Logs/packer-build-output.log | grep OSDiskUri: | awk '{print $2}')
 
 echo $imageodisk
